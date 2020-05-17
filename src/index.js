@@ -132,6 +132,7 @@ const Stocks = ({}) => {
     var ultimo_valor;
     var penultimo_valor;
     var var_porcentual;
+    var volumen_total_ticker = 0;
     var prices = updates.filter(update => update.ticker === elem.ticker);
     var valores_totales = prices.map(function(p){ return p.value } );
     if(valores_totales.length !== 0)
@@ -145,11 +146,23 @@ const Stocks = ({}) => {
         var_porcentual = (ultimo_valor-penultimo_valor)/penultimo_valor*100;
       }
     }
+    var ticker_buys = buys.filter(buy => buy.ticker === elem.ticker).map(function(p){ return p.volume } );
+    var ticker_sells = sells.filter(sell => sell.ticker === elem.ticker).map(function(p){ return p.volume } );
+    for(var buy in buys)
+    {
+      volumen_total_ticker += buys[buy].volume;
+    }
+    for(var sell in sells)
+    {
+      volumen_total_ticker += sells[sell].volume;
+    }
+
     //console.log(elem.ticker);
     graphs.push(<div>
     <h2>Empresa: {elem.company_name}</h2>
     <h3>Moneda: {elem.quote_base}</h3>
     <h3>País: {elem.country}</h3>
+    <p>Volumen total: {volumen_total_ticker}</p>
     <p>Valor máximo: {maximo_historico}</p>
     <p>Valor mínimo: {minimo_historico}</p>
     <p>Último precio: {ultimo_valor}</p>
