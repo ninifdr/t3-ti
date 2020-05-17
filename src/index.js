@@ -142,7 +142,7 @@ const Stocks = ({}) => {
       if(valores_totales.length > 1)
       {
         penultimo_valor = valores_totales[valores_totales.length - 2];
-        var_porcentual = ultimo_valor/penultimo_valor*100;
+        var_porcentual = (ultimo_valor-penultimo_valor)/penultimo_valor*100;
       }
     }
     //console.log(elem.ticker);
